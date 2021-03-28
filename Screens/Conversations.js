@@ -1,43 +1,50 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, View, ActivityIndicator, Text, FlatList, StatusBar } from 'react-native'
-import { getRessourcesFromApi } from '../API/apiCube';
-import RessourceElement from '../Components/RessourceElement.js'
+import { getAllConversationsFromApi } from '../API/apiCube';
+import ConversationElement from '../Components/ConversationElement.js'
 
-export class Home extends React.Component {
+export class Conversations extends React.Component {
 
-
+    
     constructor(props) {
         super(props)
         this.state = {
-            ressources: undefined,
+            conversations: undefined,
             isLoading: true
         }
     }
 
+    _displayMessages = (idConversation) => {
+        // console.log('display conversation #' + idConversation);
+        this.props.navigation.navigate('Messages', { idConversation: idConversation });
+    }
+    
+    // récupérer l'id et le token du store, puis les envoyer à l'api
     componentDidMount() {
-        getRessourcesFromApi().then(res => {
+
+        getAllConversationsFromApi().then(res => {
             // console.log(res);
             this.setState({
-                ressources: res.ressources,
+                conversations: res.conversations,
                 isLoading: false
             });
         });
     }
 
     render() {
-        const { ressources, isLoading } = this.state;
+        const { conversations, isLoading } = this.state;
         // console.log(ressources);
 
-        if (!isLoading && ressources != undefined)
+        if (!isLoading && conversations != undefined)
         {
             return (
                 <SafeAreaView style={styles.container}>
                     <StatusBar/>
-                    <Text>Ressources</Text>
+                    <Text>Conversations :</Text>
                     <FlatList
-                        data={ressources}
-                        keyExtractor={item => item.id_posts.toString()}
-                        renderItem={({item}) => <RessourceElement ressource={item}/>}
+                        data={conversations}
+                        keyExtractor={item => item.id.toString()} 
+                        renderItem={({item}) => <ConversationElement conversation={item} displayMessages={this._displayMessages} />}
                     />
                 </SafeAreaView>
             )
@@ -67,6 +74,6 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 5
     }
-  })
+})
 
-export default Home
+export default Conversations

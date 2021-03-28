@@ -11,8 +11,8 @@ class RessourceElement extends React.Component {
         <View style={styles.container}>
             <Text style={styles.title}>{ressource.title}</Text>
             <View style={styles.infos}>
-                <Text>{ressource.name + ' - ' + ressource.firstname}</Text>
-                <Text>{ressource.post_date}</Text>
+                <Text style={styles.grey}>{ressource.name + ' - ' + ressource.firstname}</Text>
+                <Text style={styles.grey}>{ressource.post_date}</Text>
             </View>
             <View>
                 <Text numberOfLines={5}>{ressource.content}</Text>
@@ -25,7 +25,10 @@ class RessourceElement extends React.Component {
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "grey",
+    borderRadius: 3,
+    marginTop: 10,
+    padding: 5
   },
   title: {
     fontWeight: 'bold'
@@ -33,6 +36,9 @@ const styles = StyleSheet.create({
   infos: {
       flexDirection: 'row',
       justifyContent: 'space-between'
+  },
+  grey: {
+    color: 'grey'
   }
 })
 

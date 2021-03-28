@@ -1,43 +1,44 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, View, ActivityIndicator, Text, FlatList, StatusBar } from 'react-native'
-import { getRessourcesFromApi } from '../API/apiCube';
-import RessourceElement from '../Components/RessourceElement.js'
+import { getOneConversationFromApi } from '../API/apiCube';
+import MessageElement from '../Components/MessageElement.js'
 
-export class Home extends React.Component {
+export class Messages extends React.Component {
 
-
+    
     constructor(props) {
         super(props)
         this.state = {
-            ressources: undefined,
+            messages: undefined,
             isLoading: true
         }
     }
-
+    
+    // récupérer l'id et le token du store, puis les envoyer à l'api
     componentDidMount() {
-        getRessourcesFromApi().then(res => {
+
+        getOneConversationFromApi(this.props.route.params.idConversation).then(res => {
             // console.log(res);
             this.setState({
-                ressources: res.ressources,
+                messages: res.messages,
                 isLoading: false
             });
         });
     }
 
     render() {
-        const { ressources, isLoading } = this.state;
-        // console.log(ressources);
+        const { messages, isLoading } = this.state;
 
-        if (!isLoading && ressources != undefined)
+        if (!isLoading && messages != undefined)
         {
             return (
                 <SafeAreaView style={styles.container}>
                     <StatusBar/>
-                    <Text>Ressources</Text>
+                    <Text>Messages :</Text>
                     <FlatList
-                        data={ressources}
-                        keyExtractor={item => item.id_posts.toString()}
-                        renderItem={({item}) => <RessourceElement ressource={item}/>}
+                        data={messages}
+                        keyExtractor={item => item.id_messages.toString()} 
+                        renderItem={({item}) => <MessageElement message={item}/>}
                     />
                 </SafeAreaView>
             )
@@ -67,6 +68,6 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 5
     }
-  })
+})
 
-export default Home
+export default Messages

@@ -1,6 +1,6 @@
-import store from '../Store/configureStore.js'
+import store from '../redux/store'
 
-const API_URL = 'http://192.168.0.14:3000/api/';
+const API_URL = 'http://192.168.0.11:3000/api/';
 
 export function getRessourcesFromApi() {
     const url = API_URL + 'ressource/all';
@@ -10,10 +10,15 @@ export function getRessourcesFromApi() {
         .catch(error => console.log(error));
 }
 
-export function getAllConversationsFromApi() {
+export async function getAllConversationsFromApi() {
     const state = store.getState()
-    const userId = state.account.id;
-    const token = state.token;
+
+    const token = state.auth.token;
+    console.log('token', token);
+    const userId = state.auth.account.id;
+    
+
+   
 
     const url = API_URL + 'echanges/conversations/'+userId;
     const data = {
@@ -23,22 +28,23 @@ export function getAllConversationsFromApi() {
             'Content-Type': 'application/json'
         }
     }
-
+    
     return fetch(url, data)
         .then(response => response.json())
-        .catch(error => console.log(error));
+        .catch(error => console.log(error)); 
+    
 }
 
 export function getOneConversationFromApi(targetId) {
     const state = store.getState()
-    const userId = state.account.id;
-    const token = state.token;
+    const token = state.auth.token;
+    const userId = state.auth.account.id;
 
     const url = API_URL + `echanges/messages/${userId}/${targetId}`;
     const data = {
         method: 'GET',
         headers: {
-            'Authorization': token, 
+            'Authorization': 'Bearer ' + token, 
             'Content-Type': 'application/json'
         }
     }

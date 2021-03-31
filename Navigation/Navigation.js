@@ -4,12 +4,12 @@ import Home from '../Screens/Home'
 import Profile from '../Screens/Profile'
 import Conversations from '../Screens/Conversations'
 import Messages from '../Screens/Messages'
-import Login from '../Screens/Login'
-import { getTokenAndIdUser } from '../Services/AuthService'
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import Login from '../Components/auth/auth'
+import { useSelector } from 'react-redux'
 
 const Tab   = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -26,17 +26,18 @@ function ConversationsStackScreen() {
 
 export default function Navigation() {
 
-  const user = getTokenAndIdUser();
+  const isAuth = useSelector(state => state.auth.isAuth)
 
   return (
     <NavigationContainer>
       {
         // renvoie state.isAuth 
-        !user.isAuth ? ( 
+        !isAuth ? ( 
           <>
-            <Stack.Navigator>
-              <Stack.Screen name="Login" component={Login} />
-            </Stack.Navigator>
+            <Tab.Navigator>
+              <Tab.Screen name="Home" component={Home} />
+              <Tab.Screen name="Login" component={Login} />
+            </Tab.Navigator>
           </>
         ) : (
           <>

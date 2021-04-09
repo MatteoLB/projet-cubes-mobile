@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccesAction } from '../../redux/action/authAction';
@@ -16,10 +16,12 @@ export default function Connexion() {
     const [pwd, setPwd] = useState("test")
     const [dispalyErr, setDisplayerr] = useState(false)
     const [errMsg, setErrMsg] = useState("")
+    const [dispalyLoad, setDisplayLoad] = useState(false)
 
      const login = async (email, mdp) => {
 
       setDisplayerr(false)
+      setDisplayLoad(true)
          
          console.log( 'email', email );
          console.log( 'mdp', mdp );
@@ -50,6 +52,7 @@ export default function Connexion() {
                 id: data.user_id
               }
               // on met à jour le store
+              setDisplayLoad(false)
               dispatch(loginSuccesAction(data.token, account))
               
               console.log('auth',  auth);
@@ -57,12 +60,14 @@ export default function Connexion() {
 
             }else {
               setErrMsg("Mot de passe ou email incorrecte")
+              setDisplayLoad(false)
               setDisplayerr(true)
             }
             
             
         } catch (error) {
             console.log('catch error', error);
+            setDisplayLoad(false)
             setErrMsg("Bad request")
             setDisplayerr(true)
         }
@@ -79,6 +84,12 @@ export default function Connexion() {
                }>
                <Text style = {styles.submitButtonText}> Connexion </Text>
     </TouchableOpacity>
+      {dispalyLoad && <Image 
+                source={
+                  require('../../assets/loader.gif')
+                 }
+                 style={styles.loader}
+              />}
      { dispalyErr && <Text style={styles.err} >{errMsg}</Text>}
     </View>
   );
@@ -111,5 +122,9 @@ const styles = StyleSheet.create({
  },
  err: {
      color: "red"
+ }, 
+ loader: {
+   height: 90,
+   width: 90
  }
 });

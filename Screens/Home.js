@@ -16,7 +16,7 @@ export class Home extends React.Component {
 
     componentDidMount() {
         getRessourcesFromApi().then(res => {
-            // console.log(res);
+            console.log(res);
             this.setState({
                 ressources: res.ressources,
                 isLoading: false

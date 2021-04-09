@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccesAction } from '../../redux/action/authAction';
 import { URL_API } from '../../types';
 import { useEffect } from 'react';
 
-export default function Inscription() {
+export default function Inscription({navigation}) {
 
   const auth = useSelector( state => state.auth)
   const dispatch = useDispatch()
@@ -21,7 +21,10 @@ export default function Inscription() {
   const [pwd, setPwd] = useState("")
   const [dispalyErr, setDisplayerr] = useState(false)
   const [errMsg, setErrMsg] = useState("")
+  const [dispalyLoad, setDisplayLoad] = useState(false)
 
+
+  /*
   useEffect(() => {
     return () => {
       setNom(null)
@@ -34,36 +37,45 @@ export default function Inscription() {
       setDisplayerr(null)
     }
 
-  })
+  }) */
 
   
   const inscription = async () => {
+    setDisplayLoad(true)
+
     if (nom == "") {
       setErrMsg("Le nom ne peut pas etre vide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return 
     }else if (prenom == "") {
       setErrMsg("Le prénom ne peut pas etre vide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return
     }else if (email == "") {
       setErrMsg("L'email ne peut pas etre vide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return
     }else if (bDate == "") {
       setErrMsg("La date de naissance  ne peut pas etre vide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return
     }else if (ville == "") {
       setErrMsg("La ville ne peut pas etre vide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return
     }else if (cp == "") {
       setErrMsg("Le code postale ne peut pas etre vide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return
     }else if (pwd == "") {
       setErrMsg("Veuillez insérer un mot de passe valide")
+      setDisplayLoad(false)
       setDisplayerr(true)
       return
     }
@@ -102,7 +114,7 @@ export default function Inscription() {
       console.log('res1', JSON.stringify(res1));
 
       if (res1.status === 201){
-        // On connete l'utilisateur avec ses infos
+
 
       //////////////////////////////////////////////////////// CONNEXION
       const body = {
@@ -133,18 +145,21 @@ export default function Inscription() {
           }
           // on met à jour le store
           dispatch(loginSuccesAction(data.token, account))
+          setDisplayLoad(false)
           
           console.log('auth',  auth);
-          // pussh component profil
+          
 
         }else {
           setErrMsg("Mot de passe ou email incorrecte")
+          setDisplayLoad(false)
           setDisplayerr(true)
         }
         
         
     } catch (error) {
         console.log('catch error', error);
+        setDisplayLoad(false)
         setErrMsg("Bad request")
         setDisplayerr(true)
     }
@@ -153,6 +168,7 @@ export default function Inscription() {
       setDisplayerr(false)
 
       }else {
+        setDisplayLoad(false)
         setErrMsg("Création du compte impossible")
         setDisplayerr(true)
       }
@@ -160,6 +176,7 @@ export default function Inscription() {
       
   } catch (error) {
       console.log('catch error', error);
+      setDisplayLoad(false)
       setErrMsg("Bad request")
       setDisplayerr(true)
   }
@@ -182,6 +199,12 @@ export default function Inscription() {
         style={styles.btn} >
         <Text style={styles.submitButtonText}> VALIDER </Text>
       </TouchableOpacity>
+      {dispalyLoad && <Image 
+                source={
+                  require('../../assets/loader.gif')
+                 }
+                 style={styles.loader}
+              />}
       { dispalyErr && <Text style={styles.err} >{errMsg}</Text>}
     </ScrollView>
   );
@@ -215,5 +238,9 @@ const styles = StyleSheet.create({
   },
   err: {
       color: "red"
+  }, 
+  loader: {
+    height: 90,
+    width: 90
   }
 });

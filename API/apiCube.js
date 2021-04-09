@@ -1,6 +1,6 @@
 import store from '../redux/store'
-
-const API_URL = 'http://192.168.0.11:3000/api/';
+import {URL_API} from '../types'
+const API_URL = URL_API 
 
 export function getRessourcesFromApi() {
     const url = API_URL + 'ressource/all';

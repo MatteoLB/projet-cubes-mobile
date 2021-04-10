@@ -24,6 +24,10 @@ export class Home extends React.Component {
         });
     }
 
+    _displayDetailRessource = (idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource) => {
+        this.props.navigation.navigate("RessourceDetail", { idRessource: idRessource, titleRessource: titleRessource, nameRessource: nameRessource, firstNameRessource: firstNameRessource, dateRessource: dateRessource, contentRessource: contentRessource })
+    }
+
     render() {
         const { ressources, isLoading } = this.state;
         // console.log(ressources);
@@ -37,7 +41,7 @@ export class Home extends React.Component {
                     <FlatList
                         data={ressources}
                         keyExtractor={item => item.id_posts.toString()}
-                        renderItem={({item}) => <RessourceElement ressource={item}/>}
+                        renderItem={({ item }) => <RessourceElement ressource={item} displayDetailRessource={this._displayDetailRessource}/>}
                     />
                 </SafeAreaView>
             )

@@ -44,8 +44,8 @@ export default function CommentForm(props) {
 
     if (!isAuth ){
         return (
-            <View style={styles.container}>
-                <Text>Veuillez vous connecter pour laisser un commentaire</Text>
+            <View>
+                <Text style={styles.notLogged}>Veuillez vous connecter pour laisser un commentaire.</Text>
             </View>
         )
     } else if (isAuth){
@@ -56,7 +56,7 @@ export default function CommentForm(props) {
                     title="Ajouter un commentaire"
                     onPress={() => comment()}
                     style={styles.btn} >
-                    <Text style={styles.submitButtonText}> VALIDER </Text>
+                    <Text style={styles.submitButtonText}> Envoyer </Text>
                 </TouchableOpacity>
                 {dispalyErr && <Text style={styles.err} >{errMsg}</Text>}
 
@@ -68,8 +68,8 @@ export default function CommentForm(props) {
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
-        borderColor: "black",
+        borderBottomColor: 'black',
+        borderBottomWidth: 0.8,
     },
     title: {
         fontWeight: 'bold'
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     btn: {
-        backgroundColor: '#1E90FF',
+        backgroundColor: '#7493f7',
         padding: 10,
         margin: 15,
         height: 40,
@@ -92,11 +92,22 @@ const styles = StyleSheet.create({
     input: {
         width: "90%",
         margin: 15,
+        marginBottom: 0,
         height: 40,
-        borderColor: '#1E90FF',
+        borderColor: '#4871f7',
         borderWidth: 1,
+        paddingLeft: 5,
+        paddingRight: 5
     },
     err: {
         color: "red"
+    },
+    notLogged: {
+        paddingLeft: 5,
+        paddingRight: 5, 
+        paddingTop: 5,
+        paddingBottom: 5,
+        borderBottomColor: 'black',
+        borderBottomWidth: 0.8,
     }
 })

@@ -190,7 +190,7 @@ export default function Inscription({navigation}) {
       <TextInput onChangeText={setEmail} value={email} placeholder=" Email" autoCompleteType="email" style={styles.input} />
       <TextInput onChangeText={setBdate} value={bDate} placeholder=" Date de naissance AAAA-MM-JJ" style={styles.input} />
       <TextInput onChangeText={setVille} value={ville}placeholder=" Ville" style={styles.input} />
-      <TextInput onChangeText={setCp} value={cp}  placeholder=" Code Postale"  style={styles.input} autoCompleteType="cc-number" />
+      <TextInput onChangeText={setCp} value={cp}  placeholder=" Code Postal"  style={styles.input} autoCompleteType="cc-number" />
       <TextInput onChangeText={setPwd} value={pwd} placeholder=" Mot de passe" style={styles.input} />
 
       <TouchableOpacity

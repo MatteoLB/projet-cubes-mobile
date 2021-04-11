@@ -60,6 +60,7 @@ export class Messages extends React.Component {
 
     render() {
         const { messages, isLoading } = this.state;
+        const { userId } = this.props;
         let newMessage = '';
 
         // console.log(messages);
@@ -69,11 +70,11 @@ export class Messages extends React.Component {
             return (
                 <SafeAreaView style={styles.container}>
                     <StatusBar/>
-                    <Text>Messages :</Text>
+
                     <FlatList
                         data={messages}
                         keyExtractor={item => item.id_messages.toString()} 
-                        renderItem={({item}) => <MessageElement message={item}/>}
+                        renderItem={({item}) => <MessageElement userId={userId} message={item}/>}
                     />
 
                     <View style={styles.sendContainer}>
@@ -113,24 +114,41 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      padding: 5
+      backgroundColor: 'rgb(248,248,248)'
     },
     sendContainer: {
-        marginTop: 10
+        flexDirection: 'row',
+        marginTop: 10,
+        marginBottom: 15,
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 3,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 3,
+            height: 3
+        },
+        shadowOpacity: 1,
+        shadowRadius: 2
     },
     sendInput: {
-        borderWidth: 1,
+        flex: 1,
         padding: 3,
-        marginBottom: 5,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        borderTopLeftRadius: 3,
+        borderBottomLeftRadius: 3
     },
     sendButton: {
-        backgroundColor: 'blue',
-        padding: 6
+        backgroundColor: '#1E90FF',
+        padding: 10,
+        borderTopRightRadius: 3,
+        borderBottomRightRadius: 3
     },
     sendButtonText: {
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 16
     }
 })
 

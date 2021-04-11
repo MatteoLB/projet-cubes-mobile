@@ -54,7 +54,7 @@ export class Conversations extends React.Component {
             return (
                 <SafeAreaView style={styles.container}>
                     <StatusBar/>
-                    <Text>Conversations :</Text>
+
                     <FlatList
                         data={conversations}
                         keyExtractor={item => item.id.toString()} 
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      padding: 5
+      backgroundColor: 'rgb(248,248,248)'
     }
 })
 

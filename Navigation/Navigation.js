@@ -28,9 +28,21 @@ function ConversationsStackScreen() {
 
 function Homepage() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home}  />
-      <Stack.Screen name="Login" component={Login} />
+    <Tab.Navigator tabBarOptions={{
+        labelStyle: {
+          fontSize: 15,
+        },
+        inactiveBackgroundColor: 'rgb(240,240,240)',
+        style: {
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+        tabStyle: {
+          paddingBottom: 15
+        }
+    }}>
+      <Tab.Screen name="Accueil" component={Home}  />
+      <Stack.Screen name="Connexion" component={Login} />
     </Tab.Navigator>
   );
 }
@@ -38,11 +50,23 @@ function Homepage() {
 function HomepageLogged() {
   //<Tab.Screen name="Profile" component={Profile}  /> <Tab.Screen name="Home" component={Home} />
   return (
-    <Tab.Navigator>
+    <Tab.Navigator tabBarOptions={{
+        labelStyle: {
+          fontSize: 15,
+        },
+        inactiveBackgroundColor: 'rgb(240,240,240)',
+        style: {
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+        tabStyle: {
+          paddingBottom: 15
+        }
+    }}>
 
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Accueil" component={Home} />
       <Tab.Screen name="Conversations" component={ConversationsStackScreen} />
-      <Tab.Screen name="Profile" component={Profile}  />
+      <Tab.Screen name="Profil" component={Profile}  />
   
     </Tab.Navigator>
   );

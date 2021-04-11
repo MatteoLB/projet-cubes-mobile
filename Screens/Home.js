@@ -1,18 +1,22 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, Picker, View, ActivityIndicator, Text, FlatList, StatusBar } from 'react-native'
+import { StyleSheet, SafeAreaView, Picker, View, ActivityIndicator, Text, FlatList, StatusBar, TouchableOpacity } from 'react-native'
 import { getRessourcesFromApi } from '../API/apiCube';
 import RessourceElement from '../Components/RessourceElement.js'
+import store from '../redux/store'
 
 export class Home extends React.Component {
 
+    
 
     constructor(props) {
         super(props)
         this.state = {
             ressources: undefined,
-            isLoading: true
+            isLoading: true,
+            isAuth: false
         }
     }
+
 
     _filtrerRessources(selectedOption) {
         this.setState({
@@ -63,6 +67,19 @@ export class Home extends React.Component {
                         <Picker.Item label="Récents" value="recent" />
                         <Picker.Item label="Anciens" value="ancien" />
                     </Picker>
+
+
+                        <TouchableOpacity
+                            title="Ajouter une ressource"
+                            onPress={() => this.props.navigation.navigate("RessourceMaj", { insert: true })}
+                            style={styles.submit} >
+                            <Text > Ajouter  </Text>
+                        </TouchableOpacity>
+
+
+
+
+
 
                     <FlatList
                         data={ressources}

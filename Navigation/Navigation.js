@@ -5,6 +5,7 @@ import Profile from '../Screens/Profile'
 import Conversations from '../Screens/Conversations'
 import Messages from '../Screens/Messages'
 import RessourceDetail from '../Screens/RessourceDetail'
+import RessourceMaj from '../Components/RessourceMaj'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -28,18 +29,21 @@ function ConversationsStackScreen() {
 function Homepage() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={Home}  />
       <Stack.Screen name="Login" component={Login} />
     </Tab.Navigator>
   );
 }
 
 function HomepageLogged() {
+  //<Tab.Screen name="Profile" component={Profile}  /> <Tab.Screen name="Home" component={Home} />
   return (
     <Tab.Navigator>
+
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Conversations" component={ConversationsStackScreen} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={Profile}  />
+  
     </Tab.Navigator>
   );
 }
@@ -57,6 +61,8 @@ export default function Navigation() {
             <Stack.Navigator>
               <Stack.Screen options={{ headerShown: false }} name="Homepage" component={Homepage} />
               <Stack.Screen name="RessourceDetail" component={RessourceDetail} />
+              <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
+             
             </Stack.Navigator>
           </>
         ) : (
@@ -64,6 +70,7 @@ export default function Navigation() {
               <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name="Homepage" component={HomepageLogged} />
                 <Stack.Screen name="RessourceDetail" component={RessourceDetail} />
+                <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
               </Stack.Navigator>
           </>
         )

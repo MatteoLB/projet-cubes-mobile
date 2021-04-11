@@ -1,7 +1,7 @@
 // Components/RessourceDetail.js
 
 import React from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, FlatList } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
 import { getCommentsFromApi } from '../API/apiCube';
 import CommentElement from '../Components/CommentElement.js'
 import CommentForm from '../Components/CommentForm.js'
@@ -33,6 +33,12 @@ class RessourceDetail extends React.Component {
             return (
                 <View style={styles.main_container}>
                     {/* <Text>Détail de la ressource {idRessource}</Text> */}
+                    <TouchableOpacity
+                    title="Ajouter un commentaire"
+                    onPress={() => this.props.navigation.navigate("RessourceMaj", {insert: false, idPost: idRessource })}
+                    style={styles.btn} >
+                    <Text style={styles.submitButtonText}> modifier </Text>
+                    </TouchableOpacity>
                     <Text style={styles.title}>{titleRessource}</Text>
                     <View style={styles.infos}>
                         <Text>{nameRessource + ' - ' + firstNameRessource}</Text>

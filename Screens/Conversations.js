@@ -1,7 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { StyleSheet, SafeAreaView, View, ActivityIndicator, Text, FlatList, StatusBar } from 'react-native'
 import { getAllConversationsFromApi } from '../API/apiCube';
 import ConversationElement from '../Components/ConversationElement.js'
+
+const mapStateToProps = (state) => {
+    return { 
+        userId: state.auth.account.id,
+        token: state.auth.token
+    };
+}
 
 export class Conversations extends React.Component {
 
@@ -14,15 +22,20 @@ export class Conversations extends React.Component {
         }
     }
 
+
     _displayMessages = (idConversation) => {
         // console.log('display conversation #' + idConversation);
         this.props.navigation.navigate('Messages', { idConversation: idConversation });
     }
+
+    
     
     // récupérer l'id et le token du store, puis les envoyer à l'api
     componentDidMount() {
+        console.log('in component did mount', this.props.token, this.props.userId);
 
-        getAllConversationsFromApi().then(res => {
+        let { userId, token } = this.props;
+        getAllConversationsFromApi(userId, token).then(res => {
             // console.log(res);
             this.setState({
                 conversations: res.conversations,
@@ -34,6 +47,7 @@ export class Conversations extends React.Component {
     render() {
         const { conversations, isLoading } = this.state;
         // console.log(ressources);
+        console.log("props conversation", this.props);
 
         if (!isLoading && conversations != undefined)
         {
@@ -76,4 +90,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Conversations
+export default connect(mapStateToProps)(Conversations)

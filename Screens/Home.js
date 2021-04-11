@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, View, ActivityIndicator, Text, FlatList, StatusBar } from 'react-native'
+import { StyleSheet, SafeAreaView, Picker, View, ActivityIndicator, Text, FlatList, StatusBar } from 'react-native'
 import { getRessourcesFromApi } from '../API/apiCube';
 import RessourceElement from '../Components/RessourceElement.js'
 
@@ -12,6 +12,21 @@ export class Home extends React.Component {
             ressources: undefined,
             isLoading: true
         }
+    }
+
+    _filtrerRessources(selectedOption) {
+        this.setState({
+            ressources: undefined,
+            isLoading: true
+        });
+
+        getRessourcesFromApi(selectedOption).then(res => {
+            console.log(res);
+            this.setState({
+                ressources: res.ressources,
+                isLoading: false
+            });
+        });
     }
 
     componentDidMount() {
@@ -34,6 +49,17 @@ export class Home extends React.Component {
                 <SafeAreaView style={styles.container}>
                     <StatusBar/>
                     <Text>Ressources</Text>
+
+                    <Picker
+                        selectedValue={"all"}
+                        style={{ height: 50, width: 150 }}
+                        onValueChange={(itemValue) => this._filtrerRessources(itemValue)}
+                    >
+                        <Picker.Item label="Tout" value="all" />
+                        <Picker.Item label="Récents" value="recent" />
+                        <Picker.Item label="Anciens" value="ancien" />
+                    </Picker>
+
                     <FlatList
                         data={ressources}
                         keyExtractor={item => item.id_posts.toString()}

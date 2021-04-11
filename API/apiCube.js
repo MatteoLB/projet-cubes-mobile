@@ -2,29 +2,24 @@ import store from '../redux/store'
 import {URL_API} from '../types'
 const API_URL = URL_API 
 
-export function getRessourcesFromApi() {
-    const url = API_URL + 'ressource/all';
+export function getRessourcesFromApi(selectedOption = undefined) {
+    const url = API_URL + `ressource/${selectedOption || 'all'}`;
+
+    console.log('url : ', url);
 
     return fetch(url)
         .then(response => response.json())
         .catch(error => console.log(error));
 }
 
-export async function getAllConversationsFromApi() {
-    const state = store.getState()
+export async function getAllConversationsFromApi(userId, token) {
 
-    const token = state.auth.token;
-    console.log('token', token);
-    const userId = state.auth.account.id;
-    
-
-   
-
+    console.log('before fetch conversation from api', userId, token);
     const url = API_URL + 'echanges/conversations/'+userId;
     const data = {
         method: 'GET',
         headers: {
-            'Authorization': token, 
+            'Authorization': `Bearer ${token}`, 
             'Content-Type': 'application/json'
         }
     }
@@ -78,4 +73,22 @@ export function addComment(idRessource, content){
     })
         .then(response => response.json())
         .catch(error => console.log(error));
+}
+export function sendNewMessageToApi(message, userId, token) {
+    console.log('send message', message);
+
+    const url = API_URL + 'echanges/messages/'+userId+'/send';
+    const data = {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`, 
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+    }
+    
+    return fetch(url, data)
+        .then(response => response.json())
+        .catch(error => console.log(error)); 
+    
 }

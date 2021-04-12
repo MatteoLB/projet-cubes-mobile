@@ -113,7 +113,7 @@ const Profile = () => {
                         <TouchableOpacity style={styles.buttonContainer}
                             onPress={() => showProfile()}
                         >
-                            <Text style={styles.textBtn}>Modifier le Profile</Text>
+                            <Text style={styles.textBtn}>Modifier le Profil</Text>
                         </TouchableOpacity>
                         
                     </View>

@@ -79,7 +79,7 @@ const UpadateRessource = ({route, navigation }) => {
                     setTimeout(() => {  navigation.navigate('Homepage') }, 2000);
                 } else {
                     setDisplaySucces(true)
-                    setSuccesMsg("Informations mis à jour avec succès")
+                    setSuccesMsg("Informations mises à jour avec succès")
                 }
                 
                 
@@ -89,7 +89,7 @@ const UpadateRessource = ({route, navigation }) => {
             }
             
         } catch (error) {
-            console.log("ERROR UPDATE PROFIl", error );
+            console.log("ERROR UPDATE PROFIL", error );
         }
     }
 
@@ -144,10 +144,10 @@ const UpadateRessource = ({route, navigation }) => {
                         {insert  ? "Ajouter une ressource" : `Mise à jour de la ressource ${ressource.title}`}
                     </Text>
                     <View>
-                        <TextInput onChangeText={setTitle} value={title} placeholder=" Tirtre" style={styles.input} />
+                        <TextInput onChangeText={setTitle} value={title} placeholder=" Titre" style={styles.input} />
                         <TextInput onChangeText={setpath} value={path} placeholder=" Chemin image" style={styles.input} />
-                        <TextInput onChangeText={setvisibility} value={visibility} placeholder=" Visibilté de la ressourceurce "  style={styles.input} />
-                        <TextInput onChangeText={setContent} value={content} placeholder=" Contenue" style={styles.input} />
+                        <TextInput onChangeText={setvisibility} value={visibility} placeholder=" Visibilité de la ressource "  style={styles.input} />
+                        <TextInput onChangeText={setContent} value={content} placeholder=" Contenu" style={styles.input} />
                     </View>
         
                     <TouchableOpacity
@@ -164,7 +164,7 @@ const UpadateRessource = ({route, navigation }) => {
         }
         {!isAuth && 
                 <View>
-                    <Text>Veuillez Vous connectez pour pouvoir ajouter ou modifier une ressource</Text>
+                    <Text>Veuillez vous connecter pour pouvoir ajouter ou modifier une ressource</Text>
                 </View>
         }
 

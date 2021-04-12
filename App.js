@@ -7,6 +7,7 @@ import Store from './redux/store';
 
 export default class App extends React.Component {
   render() {
+    console.disableYellowBox = true;
     return (
       <Provider store={Store}>
         <Navigation/>

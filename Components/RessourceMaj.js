@@ -76,7 +76,7 @@ const UpadateRessource = ({route, navigation }) => {
                     setDisplaySucces(true)
                     setSuccesMsg("Ajout de la ressource effectué")
                     setDisplaySucces(true)
-                    setTimeout(() => {  navigation.navigate('Home') }, 2000);
+                    setTimeout(() => {  navigation.navigate('Homepage') }, 2000);
                 } else {
                     setDisplaySucces(true)
                     setSuccesMsg("Informations mis à jour avec succès")

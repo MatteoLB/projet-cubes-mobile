@@ -43,7 +43,7 @@ function Homepage() {
         }
     }}>
       <Tab.Screen name="Accueil" component={Home}  />
-      <Stack.Screen name="Connexion" component={Login} />
+      <Tab.Screen name="Connexion" component={Login} />
     </Tab.Navigator>
   );
 }
@@ -68,6 +68,7 @@ function HomepageLogged() {
       <Tab.Screen name="Accueil" component={Home} />
       <Tab.Screen name="Conversations" component={ConversationsStackScreen} />
       <Tab.Screen name="Profil" component={Profile}  />
+      
   
     </Tab.Navigator>
   );
@@ -86,7 +87,9 @@ export default function Navigation() {
             <Stack.Navigator>
               <Stack.Screen options={{ headerShown: false }} name="Homepage" component={Homepage} />
               <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
+              <Stack.Screen name="Connexion" component={Login} />
               <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
+              
              
             </Stack.Navigator>
           </>
@@ -96,6 +99,7 @@ export default function Navigation() {
                 <Stack.Screen options={{ headerShown: false }} name="Homepage" component={HomepageLogged} />
                 <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
                 <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
+                
               </Stack.Navigator>
           </>
         )

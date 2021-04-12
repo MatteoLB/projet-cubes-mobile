@@ -1,7 +1,7 @@
 // Components/RessourceDetail.js
 
 import React from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
 import { getCommentsFromApi } from '../API/apiCube';
 import CommentElement from '../Components/CommentElement.js'
 import CommentForm from '../Components/CommentForm.js'
@@ -30,10 +30,10 @@ class RessourceDetail extends React.Component {
     render() {
         const { idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource }  = this.props.route.params;
         const { comments, isLoading } = this.state;
-        const date = dateFormat(dateRessource, "dd/mm/yyyy")
+        const date = dateFormat(dateRessource, "dd/mm/yyyy") //
         if (!isLoading && comments != undefined){
             return (
-                <View style={styles.main_container}>
+                <SafeAreaView style={styles.main_container}>
                     {/* <Text>Détail de la ressource {idRessource}</Text> */}
                     <View elevation={5} style={styles.titleContainer}>
                         <Text style={styles.title}>{titleRessource}</Text>
@@ -61,7 +61,7 @@ class RessourceDetail extends React.Component {
                         />
                         <CommentForm idRessource={idRessource}/>
                     </View>
-                </View>
+                </SafeAreaView>
             )
         }else {
             return (

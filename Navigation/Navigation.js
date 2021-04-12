@@ -7,6 +7,7 @@ import Messages from '../Screens/Messages'
 import RessourceDetail from '../Screens/RessourceDetail'
 import RessourceMaj from '../Components/RessourceMaj'
 
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -84,7 +85,7 @@ export default function Navigation() {
           <>
             <Stack.Navigator>
               <Stack.Screen options={{ headerShown: false }} name="Homepage" component={Homepage} />
-              <Stack.Screen name="RessourceDetail" component={RessourceDetail} />
+              <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
               <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
              
             </Stack.Navigator>
@@ -93,7 +94,7 @@ export default function Navigation() {
           <>
               <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name="Homepage" component={HomepageLogged} />
-                <Stack.Screen name="RessourceDetail" component={RessourceDetail} />
+                <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
                 <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
               </Stack.Navigator>
           </>

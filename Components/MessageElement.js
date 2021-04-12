@@ -14,7 +14,7 @@ class MessageElement extends React.Component {
                 <Text style={styles.title}>{message.author_name + ' ' + message.author_firstname}</Text>
             </View>
             <View>
-                <Text>{message.content} - {userId}</Text>
+                <Text>{message.content}</Text>
             </View>
         </View>
         )

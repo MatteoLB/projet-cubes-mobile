@@ -41,7 +41,7 @@ const UpadateRessource = ({route, navigation }) => {
                 title: title ,
                 content: content ,
                 path: path ,
-                path: visibility,
+                visibility: visibility,
                 id_users: idUser
             }
         } else {
@@ -120,13 +120,14 @@ const UpadateRessource = ({route, navigation }) => {
                 // on met à jour l'etat locale 
                 console.log('REPONSE GET ONE RESSOURcE', res);
                 setNewRess(res.ressource[0])
-                setTitle(ressource.title)
-                setpath(ressource.path)
-                setvisibility(ressource.visibility.toString())
-                setContent(ressource.content)
+                setTitle(res.ressource[0].title)
+                setpath(res.ressource[0].path)
+                setContent(res.ressource[0].content)
+                setvisibility(res.ressource[0].visibility.toString() )
+
                 
             } catch (error) {
-                console.log('ERROR GET PROFILE', error);
+                console.log('ERROR  ONE RESSOURcE', error);
             }
         }
         if(insert == false){
@@ -164,12 +165,6 @@ const UpadateRessource = ({route, navigation }) => {
         {!isAuth && 
                 <View>
                     <Text>Veuillez Vous connectez pour pouvoir ajouter ou modifier une ressource</Text>
-                    <TouchableOpacity
-                        title="Connexion"
-                        onPress={() => navigation.navigate('Login')}
-                        style={styles.btn}>
-                        <Text style={styles.submitButtonText}> CONNEXION </Text>
-                    </TouchableOpacity>
                 </View>
         }
 

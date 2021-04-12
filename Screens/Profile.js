@@ -41,6 +41,7 @@ const Profile = () => {
     const [displayProfil, setDisplayProfil] = useState(false)
     const [displayMdp, setDisplayMdp] = useState(false)
 
+
     //On récupère l'id et le token depuis le store avec le hooks useSelector
     const token = useSelector(state => state.auth.token)
     const idUser = useSelector(state => state.auth.account.id)

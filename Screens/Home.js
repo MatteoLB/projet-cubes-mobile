@@ -43,6 +43,10 @@ export class Home extends React.Component {
         });
     }
 
+    _navigateMessage = (idConversation) => {
+        this.props.navigation.navigate("Messages", { idConversation: idConversation });
+    }
+
     _displayDetailRessource = (idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource) => {
         this.props.navigation.navigate("RessourceDetail", { idRessource: idRessource, titleRessource: titleRessource, nameRessource: nameRessource, firstNameRessource: firstNameRessource, dateRessource: dateRessource, contentRessource: contentRessource })
     }
@@ -81,7 +85,7 @@ export class Home extends React.Component {
                     <FlatList
                         data={ressources}
                         keyExtractor={item => item.id_posts.toString()}
-                        renderItem={({ item }) => <RessourceElement ressource={item} displayDetailRessource={this._displayDetailRessource}/>}
+                        renderItem={({ item }) => <RessourceElement ressource={item} navigateMessage={this._navigateMessage} displayDetailRessource={this._displayDetailRessource}/>}
                     />
                 </SafeAreaView>
             )

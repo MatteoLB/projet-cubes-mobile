@@ -2,12 +2,14 @@
 
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import Messages from '../Screens/Messages'
 import dateFormat from 'dateformat';
 
 class RessourceElement extends React.Component {
   render() {
     const ressource = this.props.ressource;
     const displayDetailRessource = this.props.displayDetailRessource
+    const navigateMessage = this.props.navigateMessage
     const date = dateFormat(ressource.post_date, "dd/mm/yyyy")
     return (
       <TouchableOpacity onPress={() => displayDetailRessource(ressource.id_posts, ressource.title, ressource.name, ressource.firstname, ressource.post_date, ressource.content)} style={styles.container}>
@@ -15,7 +17,9 @@ class RessourceElement extends React.Component {
             <Text style={styles.title}>{ressource.title}</Text>
         </View>
         <View style={styles.infos}>
-          <Text style={styles.grey}>{ressource.name + ' - ' + ressource.firstname}</Text>
+            <TouchableOpacity onPress={() => navigateMessage(ressource.id_users)}>
+                <Text style={styles.grey}>{ressource.name + ' - ' + ressource.firstname}</Text>
+            </TouchableOpacity>
           <Text style={styles.grey}>{date}</Text>
         </View>
         <View>

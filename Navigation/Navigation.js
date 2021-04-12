@@ -95,6 +95,7 @@ export default function Navigation() {
               <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name="Homepage" component={HomepageLogged} />
                 <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
+                <Stack.Screen name="Messages" component={Messages} />
                 <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
               </Stack.Navigator>
           </>

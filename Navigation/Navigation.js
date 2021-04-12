@@ -86,7 +86,7 @@ export default function Navigation() {
           <>
             <Stack.Navigator>
               <Stack.Screen options={{ headerShown: false }} name="Homepage" component={Homepage} />
-              <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
+              <Stack.Screen name="RessourceDetail" component={RessourceDetail} />
               <Stack.Screen name="Connexion" component={Login} />
               <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
               
@@ -97,7 +97,7 @@ export default function Navigation() {
           <>
               <Stack.Navigator>
                 <Stack.Screen options={{ headerShown: false }} name="Homepage" component={HomepageLogged} />
-                <Stack.Screen options={{ headerShown: false }} name="RessourceDetail" component={RessourceDetail} />
+                <Stack.Screen name="RessourceDetail" component={RessourceDetail} />
                 <Stack.Screen name="Messages" component={Messages} />
                 <Stack.Screen name="RessourceMaj" component={RessourceMaj} />
                 

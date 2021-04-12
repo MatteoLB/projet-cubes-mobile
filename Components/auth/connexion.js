@@ -12,8 +12,8 @@ export default function Connexion() {
     const dispatch = useDispatch()
     const auth = useSelector( state => state.auth)
 
-    const [email, setEmail] = useState("matteo@gmail.com")
-    const [pwd, setPwd] = useState("test")
+    const [email, setEmail] = useState("buvat.thomas.pro@gmail.com")
+    const [pwd, setPwd] = useState("Test")
     const [dispalyErr, setDisplayerr] = useState(false)
     const [errMsg, setErrMsg] = useState("")
     const [dispalyLoad, setDisplayLoad] = useState(false)

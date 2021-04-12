@@ -13,7 +13,9 @@ export default function CommentForm(props) {
     const idRessource = props.idRessource;
     const [content, setContent] = useState("");
     const [dispalyErr, setDisplayerr] = useState(false);
+    const [dispalySucces, setDisplaySucces] = useState(false)
     const [errMsg, setErrMsg] = useState("");
+    const [succesMsg, setSuccesMsg] = useState("")
     const comment = async () => {
         if (content == "") {
             setErrMsg("Veuillez ecrire un commentaire")
@@ -23,17 +25,10 @@ export default function CommentForm(props) {
 
         try {
             const res = addComment(idRessource, content);
-            // const res = await fetch(URL_API + 'echanges/addComment', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Accept': 'application/json, */*',
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({ userId: 9, ressourceId: idRessource, content: content })
-            // })
-
             const data = await res;
             console.log('retour log', JSON.stringify(data));
+            setSuccesMsg("Commentaire ajouté")
+            setDisplaySucces(true)
         } catch (error) {
             console.log('catch error', error);
             setErrMsg("Bad request")
@@ -52,13 +47,15 @@ export default function CommentForm(props) {
         return (
             <View style={styles.container}>
                 <TextInput onChangeText={setContent} value={content} placeholder="Votre Commentaire" style={styles.input} />
+                {dispalyErr && <Text style={styles.err} >{errMsg}</Text>}
+                {dispalySucces && <Text style={styles.succesMsg} >{succesMsg}</Text>}
                 <TouchableOpacity
                     title="Ajouter un commentaire"
                     onPress={() => comment()}
                     style={styles.btn} >
                     <Text style={styles.submitButtonText}> Envoyer </Text>
                 </TouchableOpacity>
-                {dispalyErr && <Text style={styles.err} >{errMsg}</Text>}
+                
 
             </View>
         )
@@ -100,7 +97,12 @@ const styles = StyleSheet.create({
         paddingRight: 5
     },
     err: {
-        color: "red"
+        color: "red",
+        textAlign: "center"
+    },
+    succesMsg : {
+        color: "green",
+        textAlign: "center"
     },
     notLogged: {
         paddingLeft: 5,

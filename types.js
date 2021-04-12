@@ -1,4 +1,4 @@
-export const URL_API = 'http://10.113.128.93:3000/api/'
+export const URL_API = 'http://192.168.0.17:3000/api/'
 
 
 /** LOGIN  **/

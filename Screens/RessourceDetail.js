@@ -1,7 +1,7 @@
 // Components/RessourceDetail.js
 
 import React from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { getCommentsFromApi } from '../API/apiCube';
 import CommentElement from '../Components/CommentElement.js'
 import CommentForm from '../Components/CommentForm.js'
@@ -20,7 +20,6 @@ class RessourceDetail extends React.Component {
 
     componentDidMount() {
         getCommentsFromApi(this.props.route.params.idRessource).then(res => {
-            // console.log(res);
             this.setState({
                 comments: res.comments,
                 isLoading: false
@@ -28,22 +27,30 @@ class RessourceDetail extends React.Component {
         });
     }
 
+    _navigateMessage = (idConversation) => {
+        this.props.navigation.navigate("Messages", { idConversation: idConversation });
+    }
+
     render() {
         const { idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource, idAuthor }  = this.props.route.params;
         const { comments, isLoading } = this.state;
-        const { userId } = this.props;
+        navigateMessageAuthor = () => {
+            this.props.navigation.navigate("Messages", { idConversation: idAuthor });
+        }
 
         const date = dateFormat(dateRessource, "dd/mm/yyyy") //
         if (!isLoading && comments != undefined){
             return (
-                <SafeAreaView style={styles.main_container}>
+                <ScrollView style={styles.main_container}>
                     {/* <Text>Détail de la ressource {idRessource}</Text> */}
                     <View elevation={5} style={styles.titleContainer}>
                         <Text style={styles.title}>{titleRessource}</Text>
                     </View>
                     
                     <View style={styles.infos}>
-                        <Text style={styles.grey}>{nameRessource + ' - ' + firstNameRessource}</Text>
+                        <TouchableOpacity onPress={() => navigateMessageAuthor()}>
+                            <Text style={styles.grey}>{nameRessource + ' - ' + firstNameRessource}</Text>
+                        </TouchableOpacity>
                         <Text style={styles.greyItalic}>{date}</Text>
                     </View>
                     <View>
@@ -60,11 +67,11 @@ class RessourceDetail extends React.Component {
                         <FlatList
                             data={comments}
                             keyExtractor={item => item.id_comments.toString()}
-                            renderItem={({ item }) => <CommentElement comment={item} />}
+                            renderItem={({ item }) => <CommentElement comment={item} navigateMessage={this._navigateMessage} />}
                         />
                         <CommentForm idRessource={idRessource}/>
                     </View>
-                </SafeAreaView>
+                </ScrollView>
             )
         }else {
             return (
@@ -97,7 +104,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        textTransform: 'capitalize',
         paddingLeft: 5,
         paddingRight: 5,
         fontSize: 16,

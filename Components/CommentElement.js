@@ -1,18 +1,21 @@
 // Components/CommentElement.js
 
 import React from 'react'
-import { StyleSheet, View, Text} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity} from 'react-native'
 import dateFormat from 'dateformat';
 
 class CommentElement extends React.Component {
     render() {
         const comment = this.props.comment;
+        const navigateMessage = this.props.navigateMessage;
         const date = dateFormat(comment.date_comment, "dd/mm/yy HH:MM")
 
         return (
             <View style={styles.container}>
                 <View style={styles.infos}>
-                    <Text style={styles.grey}>{comment.name + ' - ' + comment.firstname}</Text>
+                    <TouchableOpacity onPress={() => navigateMessage(comment.id_users)}>
+                        <Text style={styles.grey}>{comment.name + ' - ' + comment.firstname}</Text>
+                    </TouchableOpacity>
                     <Text style={styles.greyItalic}>{date}</Text>
                 </View>
                 <View>

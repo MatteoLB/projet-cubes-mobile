@@ -10,7 +10,9 @@ class RessourceElement extends React.Component {
 
     return (
       <TouchableOpacity onPress={() => displayDetailRessource(ressource.id_posts, ressource.title, ressource.name, ressource.firstname, ressource.post_date, ressource.content)} style={styles.container}>
-        <Text style={styles.title}>{ressource.title}</Text>
+        <View style={styles.header}>
+            <Text style={styles.title}>{ressource.title}</Text>
+        </View>
         <View style={styles.infos}>
           <Text style={styles.grey}>{ressource.name + ' - ' + ressource.firstname}</Text>
           <Text style={styles.grey}>{ressource.post_date}</Text>
@@ -24,20 +26,40 @@ class RessourceElement extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderColor: "black",
-  },
-  title: {
-    fontWeight: 'bold'
-  },
-  infos: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  grey: {
-    color: 'grey'
-  }
+    container: {
+        borderRadius: 3,
+        marginTop: 5,
+        marginLeft: 5,
+        marginRight: 5,
+        marginBottom: 10,
+        padding: 5,
+        backgroundColor: 'white',
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 3,
+            height: 3
+        },
+        shadowOpacity: 1,
+        shadowRadius: 2
+    },
+    header: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#EEEEEE'
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginBottom: 5
+    },
+    infos: {
+        marginTop: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    grey: {
+        color: 'grey'
+    }
 })
 
 export default RessourceElement

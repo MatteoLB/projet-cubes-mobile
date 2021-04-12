@@ -23,14 +23,16 @@ class ConversationElement extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
-        borderColor: "grey",
-        borderRadius: 3,
-        marginTop: 10,
-        padding: 5
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: "silver",
+        padding: 12,
+        backgroundColor: 'white'
     },
     title: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginBottom: 5
     },
     infos: {
         flexDirection: 'row',

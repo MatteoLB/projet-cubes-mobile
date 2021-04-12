@@ -56,30 +56,27 @@ export class Home extends React.Component {
             return (
                 <SafeAreaView style={styles.container}>
                     <StatusBar/>
-                    <Text>Ressources</Text>
 
-                    <Picker
-                        selectedValue={"all"}
-                        style={{ height: 50, width: 150 }}
-                        onValueChange={(itemValue) => this._filtrerRessources(itemValue)}
-                    >
-                        <Picker.Item label="Tout" value="all" />
-                        <Picker.Item label="Récents" value="recent" />
-                        <Picker.Item label="Anciens" value="ancien" />
-                    </Picker>
+                    <View style={{ backgroundColor: 'white', marginBottom: 10, elevation: 3}}>
+                        <Picker
+                            selectedValue={"all"}
+                            style={{ height: 50, width: 150 }}
+                            onValueChange={(itemValue) => this._filtrerRessources(itemValue)}
+                        >
+                            <Picker.Item label="Tout" value="all" />
+                            <Picker.Item label="Récents" value="recent" />
+                            <Picker.Item label="Anciens" value="ancien" />
+                            {/* <Picker.Item label="Mes ressources" value="user" /> */}
+                        </Picker>
 
+                    </View>
 
-                        <TouchableOpacity
+                    <TouchableOpacity
                             title="Ajouter une ressource"
                             onPress={() => this.props.navigation.navigate("RessourceMaj", { insert: true })}
                             style={styles.submit} >
-                            <Text > Ajouter  </Text>
+                            <Text style={{ textAlign: 'center', color: 'white' , fontSize: 16}}> Ajouter  </Text>
                         </TouchableOpacity>
-
-
-
-
-
 
                     <FlatList
                         data={ressources}
@@ -112,7 +109,16 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      padding: 5
+      backgroundColor: 'rgb(248,248,248)'
+    },
+    submit: {
+        backgroundColor: '#1E90FF',
+        padding: 8,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 15,
+        marginBottom: 10,
+        borderRadius: 3,
     }
   })
 

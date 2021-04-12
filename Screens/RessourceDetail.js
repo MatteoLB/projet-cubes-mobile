@@ -30,7 +30,7 @@ class RessourceDetail extends React.Component {
     render() {
         const { idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource }  = this.props.route.params;
         const { comments, isLoading } = this.state;
-        const date = dateFormat(dateRessource, "dd/mm/yyyy")
+        const date = dateFormat(dateRessource, "dd/mm/yyyy") //
         if (!isLoading && comments != undefined){
             return (
                 <SafeAreaView style={styles.main_container}>

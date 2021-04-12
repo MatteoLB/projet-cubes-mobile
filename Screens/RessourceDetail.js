@@ -1,7 +1,7 @@
 // Components/RessourceDetail.js
 
 import React from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
 import { getCommentsFromApi } from '../API/apiCube';
 import CommentElement from '../Components/CommentElement.js'
 import CommentForm from '../Components/CommentForm.js'
@@ -31,7 +31,7 @@ class RessourceDetail extends React.Component {
         const { comments, isLoading } = this.state;
         if (!isLoading && comments != undefined){
             return (
-                <View style={styles.main_container}>
+                <SafeAreaView style={styles.main_container}>
                     {/* <Text>Détail de la ressource {idRessource}</Text> */}
                     <TouchableOpacity
                     title="Ajouter un commentaire"
@@ -56,7 +56,7 @@ class RessourceDetail extends React.Component {
                         />
                         <CommentForm idRessource={idRessource}/>
                     </View>
-                </View>
+                </SafeAreaView>
             )
         }else {
             return (

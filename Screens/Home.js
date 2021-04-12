@@ -1,12 +1,19 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, Picker, View, ActivityIndicator, Text, FlatList, StatusBar, TouchableOpacity } from 'react-native'
+import { StyleSheet, SafeAreaView, ScrollView, RefreshControl, Picker, View, ActivityIndicator, Text, FlatList, StatusBar, TouchableOpacity } from 'react-native'
 import { getRessourcesFromApi } from '../API/apiCube';
 import RessourceElement from '../Components/RessourceElement.js'
+import { connect } from 'react-redux'
 import store from '../redux/store'
 
-export class Home extends React.Component {
+const mapStateToProps = (state) => {
+    return { 
+        userId: state.auth.account ? state.auth.account.id : null,
+        token: state.auth ? state.auth.token : null,
+        isAuth: state.auth.account ? true : false
+    };
+}
 
-    
+export class Home extends React.Component {
 
     constructor(props) {
         super(props)
@@ -53,7 +60,9 @@ export class Home extends React.Component {
 
     render() {
         const { ressources, isLoading } = this.state;
+        const { isAuth } = this.props;
         // console.log(ressources);
+        console.log('home props', this.props);
 
         if (!isLoading && ressources != undefined)
         {
@@ -78,15 +87,16 @@ export class Home extends React.Component {
                     <TouchableOpacity
                             title="Ajouter une ressource"
                             onPress={() => this.props.navigation.navigate("RessourceMaj", { insert: true })}
-                            style={styles.submit} >
+                            style={[styles.submit, isAuth ? styles.displayFlex : styles.displayNone]} >
                             <Text style={{ textAlign: 'center', color: 'white' , fontSize: 16}}> Ajouter  </Text>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
 
                     <FlatList
                         data={ressources}
                         keyExtractor={item => item.id_posts.toString()}
                         renderItem={({ item }) => <RessourceElement ressource={item} navigateMessage={this._navigateMessage} displayDetailRessource={this._displayDetailRessource}/>}
                     />
+
                 </SafeAreaView>
             )
         }
@@ -123,7 +133,13 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginBottom: 10,
         borderRadius: 3,
+    },
+    displayNone: {
+        display: 'none'
+    },
+    display: {
+        display: 'flex'
     }
   })
 
-export default Home
+export default connect(mapStateToProps)(Home)

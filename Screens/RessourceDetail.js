@@ -7,6 +7,7 @@ import CommentElement from '../Components/CommentElement.js'
 import CommentForm from '../Components/CommentForm.js'
 import dateFormat from 'dateformat';
 
+
 class RessourceDetail extends React.Component {
 
     constructor(props) {
@@ -28,8 +29,10 @@ class RessourceDetail extends React.Component {
     }
 
     render() {
-        const { idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource }  = this.props.route.params;
+        const { idRessource, titleRessource, nameRessource, firstNameRessource, dateRessource, contentRessource, idAuthor }  = this.props.route.params;
         const { comments, isLoading } = this.state;
+        const { userId } = this.props;
+
         const date = dateFormat(dateRessource, "dd/mm/yyyy") //
         if (!isLoading && comments != undefined){
             return (

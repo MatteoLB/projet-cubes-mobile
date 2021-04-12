@@ -163,7 +163,7 @@ const UpadateRessource = ({route, navigation }) => {
         }
         {!isAuth && 
                 <View>
-                    <Text>Veuillez Vous connectez pour pouvoir ajouter ou modifier une ressource une ressource</Text>
+                    <Text>Veuillez Vous connectez pour pouvoir ajouter ou modifier une ressource</Text>
                     <TouchableOpacity
                         title="Connexion"
                         onPress={() => navigation.navigate('Login')}
